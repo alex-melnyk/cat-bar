@@ -38,6 +38,7 @@ export default function App() {
       barStyle={{
         justifyContent: 'space-between'
       }}
+      barColor="#FBF0E4"
       headerComponent={(
         <SideBarActions
           icons={['apps', 'search']}

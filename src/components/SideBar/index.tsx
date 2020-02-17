@@ -1,8 +1,9 @@
 import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
-import { Animated, Image, SafeAreaView, StyleProp, Text, View, ViewStyle } from 'react-native';
-import { styles } from './Styles';
+import { Animated, SafeAreaView, StyleProp, Text, View, ViewStyle } from 'react-native';
 import { SideBarSection } from '../SideBarSection';
 import { SideBarSectionLabel } from '../SideBarSectionLabel';
+import { SideBarSelector } from '../SvgImage';
+import { styles } from './Styles';
 
 const BAR_SIZE = 60;
 const SECTION_SIZE = 160;
@@ -20,6 +21,7 @@ type Props = {
   sectionSize?: number;
   barStyle?: StyleProp<ViewStyle>;
   sectionStyle?: StyleProp<ViewStyle>;
+  barColor?: string;
   headerComponent?: ReactElement;
   footerComponent?: ReactElement;
   onSelect: (index: number) => void;
@@ -32,6 +34,7 @@ export const SideBar: React.FC<Props> = ({
   sectionSize = SECTION_SIZE,
   barStyle,
   sectionStyle,
+  barColor = '#FF0000',
   headerComponent,
   footerComponent,
   onSelect
@@ -96,7 +99,8 @@ export const SideBar: React.FC<Props> = ({
     <View style={styles.container}>
       <SafeAreaView
         style={[styles.sectionContainer, {
-          width: barSize
+          width: barSize,
+          backgroundColor: barColor
         }, barStyle]}
       >
         {headerComponent}
@@ -110,9 +114,8 @@ export const SideBar: React.FC<Props> = ({
             }]}
           >
             <View style={styles.selectionDot}/>
-            <Image
-              style={styles.selectionBg}
-              source={require('../../../assets/selected-bg.png')}
+            <SideBarSelector
+              color={barColor}
             />
           </Animated.View>
         </View>

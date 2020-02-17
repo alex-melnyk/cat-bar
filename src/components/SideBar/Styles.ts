@@ -10,7 +10,6 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    backgroundColor: '#FBF0E4',
     zIndex: 1
   },
   sectionItem: {
