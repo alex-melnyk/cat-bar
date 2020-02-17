@@ -1,5 +1,5 @@
-import React, { ReactElement, useMemo } from 'react';
-import { SafeAreaView, StyleProp, Text, View, ViewStyle } from 'react-native';
+import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
+import { Animated, Image, SafeAreaView, StyleProp, Text, View, ViewStyle } from 'react-native';
 import { styles } from './Styles';
 import { SideBarSection } from '../SideBarSection';
 import { SideBarSectionLabel } from '../SideBarSectionLabel';
@@ -36,6 +36,19 @@ export const SideBar: React.FC<Props> = ({
   footerComponent,
   onSelect
 }) => {
+  const animated = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    Animated.spring(animated, {
+      toValue: selected
+    }).start();
+  }, [animated, selected]);
+
+  const interpolateConfig = useMemo(() => ({
+    inputRange: data.map((v, idx) => idx),
+    outputRange: data.map((v, idx) => idx * sectionSize)
+  }), [data, sectionSize]);
+
   const sectionsList = useMemo(() => data.map((section, idx) => {
     const handlePress = () => onSelect(idx);
     const active = (selected === idx);
@@ -54,7 +67,6 @@ export const SideBar: React.FC<Props> = ({
         barSize={barSize}
         sectionSize={sectionSize}
         style={sectionStyle}
-        active={active}
         onPress={handlePress}
       >
         {sectionLabel}
@@ -78,14 +90,31 @@ export const SideBar: React.FC<Props> = ({
     );
   }, [data, selected]);
 
+  const topTranslate = animated.interpolate(interpolateConfig);
+
   return (
     <View style={styles.container}>
-      <SafeAreaView style={[styles.sectionContainer, {
-        width: barSize
-      }, barStyle]}>
+      <SafeAreaView
+        style={[styles.sectionContainer, {
+          width: barSize
+        }, barStyle]}
+      >
         {headerComponent}
-        <View>
+        <View style={styles.selectionContainer}>
           {sectionsList}
+          <Animated.View
+            style={[styles.selectionWrapper, {
+              top: topTranslate,
+              width: barSize,
+              height: sectionSize
+            }]}
+          >
+            <View style={styles.selectionDot}/>
+            <Image
+              style={styles.selectionBg}
+              source={require('../../../assets/selected-bg.png')}
+            />
+          </Animated.View>
         </View>
         {footerComponent}
       </SafeAreaView>

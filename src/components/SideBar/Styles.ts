@@ -10,7 +10,8 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     flexDirection: 'column',
-    backgroundColor: '#FBF0E4'
+    backgroundColor: '#FBF0E4',
+    zIndex: 1
   },
   sectionItem: {
     alignItems: 'center',
@@ -27,6 +28,27 @@ export const styles = StyleSheet.create({
     fontWeight: '500',
     textAlign: 'center',
     color: '#E94F37'
+  },
+  selectionContainer: {
+    position: 'relative'
+  },
+  selectionWrapper: {
+    position: 'absolute',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    right: -27,
+  },
+  selectionDot: {
+    marginRight: 10,
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    backgroundColor: '#F08E6F'
+  },
+  selectionBg: {
+    width: 27,
+    height: 141
   },
   noContentContainer: {
     flex: 1,
