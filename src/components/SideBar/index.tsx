@@ -4,7 +4,7 @@ import { styles } from './Styles';
 import { SideBarSection } from '../SideBarSection';
 import { SideBarSectionLabel } from '../SideBarSectionLabel';
 
-const BAR_SIZE = 80;
+const BAR_SIZE = 60;
 const SECTION_SIZE = 160;
 
 export type ISection = {
