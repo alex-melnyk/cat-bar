@@ -54,6 +54,7 @@ export const SideBar: React.FC<Props> = ({
         barSize={barSize}
         sectionSize={sectionSize}
         style={sectionStyle}
+        active={active}
         onPress={handlePress}
       >
         {sectionLabel}
