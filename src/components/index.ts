@@ -1,3 +1,4 @@
+export * from './MealItem';
 export * from './SideBar';
 export * from './SideBarActions';
 export * from './SideBarSection';

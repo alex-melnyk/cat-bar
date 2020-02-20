@@ -1,5 +1,12 @@
-import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from 'react-native';
-import React, { useMemo, useState } from 'react';
+import { FlatList, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import React, { useCallback, useMemo, useState } from 'react';
+import { MealItem } from '../components';
+// @ts-ignore
+import Meal1 from '../../assets/dishes/meal_1.png';
+// @ts-ignore
+import Meal2 from '../../assets/dishes/meal_2.png';
+// @ts-ignore
+import Meal3 from '../../assets/dishes/meal_3.png';
 
 type Props = {
   title: string;
@@ -22,6 +29,10 @@ export const EmptyScreen: React.FC<Props> = ({ title }) => {
     ...item,
     active: (selected === idx)
   })), [selected]);
+
+  const handleMealPress = useCallback(() => {
+    // HANDLE MEAL PRESS
+  }, []);
 
   const renderItem = ({ item, index }) => {
     const handlePress = () => setSelected(index);
@@ -50,7 +61,7 @@ export const EmptyScreen: React.FC<Props> = ({ title }) => {
           style={{
             fontSize: 14,
             fontWeight: '600',
-            color:  item.active
+            color: item.active
               ? '#F08E6F'
               : '#9CA0AF'
           }}
@@ -103,6 +114,39 @@ export const EmptyScreen: React.FC<Props> = ({ title }) => {
           horizontal={true}
           showsHorizontalScrollIndicator={false}
         />
+      </View>
+      <View>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            marginHorizontal: 20,
+            marginVertical: 50,
+          }}
+          horizontal={true}
+          showsHorizontalScrollIndicator={true}
+        >
+          <MealItem
+            name="Rogue"
+            extra="with chicken"
+            image={Meal1}
+            calories={1020}
+            onPress={handleMealPress}
+          />
+          <MealItem
+            name="Meat"
+            extra="with spinach"
+            image={Meal2}
+            calories={910}
+            onPress={handleMealPress}
+          />
+          <MealItem
+            name="Stake"
+            extra="with broccoli"
+            image={Meal3}
+            calories={1690}
+            onPress={handleMealPress}
+          />
+        </ScrollView>
       </View>
     </SafeAreaView>
   );
