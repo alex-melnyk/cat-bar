@@ -97,6 +97,11 @@ export const SideBar: React.FC<Props> = ({
 
   return (
     <View style={styles.container}>
+      <View style={[styles.contentContainer, {
+        paddingLeft: barSize,
+      }]}>
+        {ContentSection}
+      </View>
       <SafeAreaView
         style={[styles.sectionContainer, {
           width: barSize,
@@ -121,9 +126,6 @@ export const SideBar: React.FC<Props> = ({
         </View>
         {footerComponent}
       </SafeAreaView>
-      <View style={styles.contentContainer}>
-        {ContentSection}
-      </View>
     </View>
   );
 };

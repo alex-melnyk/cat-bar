@@ -6,11 +6,13 @@ export const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   sectionContainer: {
+    position: 'absolute',
+    left: 0,
+    top: 0,
     height: '100%',
     alignItems: 'center',
     justifyContent: 'flex-start',
-    flexDirection: 'column',
-    zIndex: 1
+    flexDirection: 'column'
   },
   sectionItem: {
     alignItems: 'center',
@@ -33,10 +35,11 @@ export const styles = StyleSheet.create({
   },
   selectionWrapper: {
     position: 'absolute',
+    right: -27,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    right: -27,
+    elevation: 5
   },
   selectionDot: {
     marginRight: 10,
