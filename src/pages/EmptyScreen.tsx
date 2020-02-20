@@ -119,11 +119,16 @@ export const EmptyScreen: React.FC<Props> = ({ title }) => {
         <ScrollView
           contentContainerStyle={{
             flexGrow: 1,
-            marginHorizontal: 20,
+            paddingLeft: 20,
+            paddingHorizontal: 60,
             marginVertical: 50,
           }}
           horizontal={true}
-          showsHorizontalScrollIndicator={true}
+          showsHorizontalScrollIndicator={false}
+          snapToAlignment="start"
+          snapToInterval={260}
+          decelerationRate="fast"
+          pagingEnabled={true}
         >
           <MealItem
             name="Rogue"
