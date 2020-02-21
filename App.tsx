@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 import { SideBar, SideBarActions } from './src/components';
-import { EmptyScreen } from './src/pages';
+import { BakeryScreen, DrinksScreen, FoodScreen } from './src/pages';
 
 export default function App() {
   const [selectedSection, setSelectedSection] = useState(0);
@@ -9,18 +9,18 @@ export default function App() {
     {
       label: 'Bakery',
       // icon: 'food-croissant',
-      content: <EmptyScreen title="Bakery"/>
+      content: <BakeryScreen title="Bakery"/>
     },
     {
       label: 'Food',
       // icon: 'food',
-      content: <EmptyScreen title="Food"/>
+      content: <FoodScreen title="Food"/>
     },
     {
       label: 'Drinks',
       // icon: 'cup-water',
-      content: <EmptyScreen title="Drinks"/>
-    },
+      content: <DrinksScreen title="Drinks"/>
+    }
   ];
 
   const handleSelect = useCallback((index) => {

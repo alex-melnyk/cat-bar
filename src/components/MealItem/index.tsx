@@ -1,17 +1,21 @@
-import { Image, ImageSourcePropType, Text, TouchableOpacity, View } from 'react-native';
-import { FontAwesome as Icon } from '@expo/vector-icons';
 import React from 'react';
+import { Image, ImageSourcePropType, Dimensions, Text, TouchableOpacity, View } from 'react-native';
+import { FontAwesome as Icon } from '@expo/vector-icons';
 import { styles } from './Styles';
 
 type Props = {
+  width: number;
+  height: number;
   image: ImageSourcePropType;
   name: string;
-  extra: string;
+  extra?: string;
   calories: number;
   onPress: () => void;
 };
 
 export const MealItem: React.FC<Props> = ({
+  width,
+  height,
   image,
   name,
   extra,
@@ -19,7 +23,10 @@ export const MealItem: React.FC<Props> = ({
   onPress
 }) => (
   <View style={styles.container}>
-    <View style={styles.card}>
+    <View style={[styles.card, {
+      width: width - 60,
+      height: height - 60
+    }]}>
       <Text style={styles.name}>
         {name}
       </Text>
@@ -42,10 +49,7 @@ export const MealItem: React.FC<Props> = ({
           >
             <Icon
               name="bookmark"
-              style={{
-                fontSize: 16,
-                color: '#F08E6F'
-              }}
+              style={styles.bookmarkIcon}
             />
           </TouchableOpacity>
         </View>

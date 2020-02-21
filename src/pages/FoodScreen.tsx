@@ -1,18 +1,26 @@
-import { FlatList, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import React, { useCallback, useMemo, useState } from 'react';
 import { MealItem } from '../components';
 // @ts-ignore
-import Meal1 from '../../assets/dishes/meal_1.png';
+import Meal1 from '../../assets/img/meal_1.png';
 // @ts-ignore
-import Meal2 from '../../assets/dishes/meal_2.png';
+import Meal2 from '../../assets/img/meal_2.png';
 // @ts-ignore
-import Meal3 from '../../assets/dishes/meal_3.png';
+import Meal3 from '../../assets/img/meal_3.png';
+
+const {
+  width: screenWidth,
+  height: screenHeight
+} = Dimensions.get('screen');
+
+const DISH_ITEM_WIDTH = screenWidth - 80;
+const DISH_ITEM_HEIGHT = screenHeight / 1.75;
 
 type Props = {
   title: string;
 };
 
-export const EmptyScreen: React.FC<Props> = ({ title }) => {
+export const FoodScreen: React.FC<Props> = ({ title }) => {
   const [selected, setSelected] = useState(0);
 
   const categories = useMemo<Array<{
@@ -115,44 +123,47 @@ export const EmptyScreen: React.FC<Props> = ({ title }) => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-      <View>
-        <ScrollView
-          contentContainerStyle={{
-            flexGrow: 1,
-            paddingLeft: 20,
-            paddingHorizontal: 60,
-            marginVertical: 50,
-          }}
-          horizontal={true}
-          showsHorizontalScrollIndicator={false}
-          snapToAlignment="start"
-          snapToInterval={260}
-          decelerationRate="fast"
-          pagingEnabled={true}
-        >
-          <MealItem
-            name="Rogue"
-            extra="with chicken"
-            image={Meal1}
-            calories={1020}
-            onPress={handleMealPress}
-          />
-          <MealItem
-            name="Meat"
-            extra="with spinach"
-            image={Meal2}
-            calories={910}
-            onPress={handleMealPress}
-          />
-          <MealItem
-            name="Stake"
-            extra="with broccoli"
-            image={Meal3}
-            calories={1690}
-            onPress={handleMealPress}
-          />
-        </ScrollView>
-      </View>
+      <ScrollView
+        contentContainerStyle={{
+          flexGrow: 1,
+          paddingRight: 20,
+          marginTop: 25,
+        }}
+        horizontal={true}
+        showsHorizontalScrollIndicator={false}
+        decelerationRate="fast"
+        pagingEnabled={true}
+        snapToAlignment="start"
+        snapToInterval={DISH_ITEM_WIDTH}
+      >
+        <MealItem
+          width={DISH_ITEM_WIDTH}
+          height={DISH_ITEM_HEIGHT}
+          name="Rogue"
+          extra="with chicken"
+          image={Meal1}
+          calories={1020}
+          onPress={handleMealPress}
+        />
+        <MealItem
+          width={DISH_ITEM_WIDTH}
+          height={DISH_ITEM_HEIGHT}
+          name="Meat"
+          extra="with spinach"
+          image={Meal2}
+          calories={910}
+          onPress={handleMealPress}
+        />
+        <MealItem
+          width={DISH_ITEM_WIDTH}
+          height={DISH_ITEM_HEIGHT}
+          name="Stake"
+          extra="with broccoli"
+          image={Meal3}
+          calories={1690}
+          onPress={handleMealPress}
+        />
+      </ScrollView>
     </SafeAreaView>
   );
 };

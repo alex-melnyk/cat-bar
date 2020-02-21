@@ -15,13 +15,13 @@ export const styles = StyleSheet.create({
     marginLeft: 60,
     marginTop: 60,
     padding: 20,
-    paddingTop: 200,
     width: 180,
-    height: 460,
+    height: 400,
     borderRadius: 10,
     backgroundColor: '#FBF0E4'
   },
   name: {
+    marginTop: 180,
     fontSize: 18,
     fontWeight: '600'
   },
@@ -58,5 +58,9 @@ export const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: '#FFF'
+  },
+  bookmarkIcon: {
+    fontSize: 16,
+    color: '#F08E6F'
   }
 });
