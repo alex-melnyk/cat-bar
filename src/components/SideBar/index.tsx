@@ -1,9 +1,23 @@
-import React, { ReactElement, useEffect, useMemo, useRef } from 'react';
-import { Animated, SafeAreaView, StyleProp, Text, View, ViewStyle } from 'react-native';
+import React, { ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  Animated,
+  Dimensions,
+  FlatList,
+  NativeScrollEvent,
+  NativeSyntheticEvent,
+  SafeAreaView,
+  StyleProp,
+  View,
+  ViewStyle
+} from 'react-native';
 import { SideBarSection } from '../SideBarSection';
 import { SideBarSectionLabel } from '../SideBarSectionLabel';
 import { SideBarSelector } from '../SvgImage';
 import { styles } from './Styles';
+
+const {
+  height: screenHeight
+} = Dimensions.get('screen');
 
 const BAR_SIZE = 60;
 const SECTION_SIZE = 160;
@@ -39,6 +53,7 @@ export const SideBar: React.FC<Props> = ({
   footerComponent,
   onSelect
 }) => {
+  const [scrollValue, setScrollValue] = useState(0);
   const animated = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
@@ -77,21 +92,22 @@ export const SideBar: React.FC<Props> = ({
     );
   }), [data, selected, barSize, sectionSize, sectionStyle, onSelect]);
 
-  const ContentSection = useMemo(() => {
-    const section = data.find((section, idx) => selected === idx);
+  const contentList = useMemo(() => data.map((item, idx) => (
+    <View
+      style={{
+        height: screenHeight,
+        alignItems: 'flex-end'
+      }}
+    >
+      {item.content}
+    </View>
+  )), [data]);
 
-    if (section && section.content) {
-      return section.content;
-    }
-
-    return (
-      <View style={styles.noContentContainer}>
-        <Text style={styles.noContentLabel}>
-          NO CONTENT
-        </Text>
-      </View>
-    );
-  }, [data, selected]);
+  const handleContentScroll = useCallback(({ nativeEvent }: NativeSyntheticEvent<NativeScrollEvent>) => {
+    // setScrollValue(nativeEvent.contentOffset.y);
+    const offset = nativeEvent.contentOffset.y;
+    animated.setValue(offset / screenHeight);
+  }, [animated]);
 
   const topTranslate = animated.interpolate(interpolateConfig);
 
@@ -100,7 +116,17 @@ export const SideBar: React.FC<Props> = ({
       <View style={[styles.contentContainer, {
         paddingLeft: barSize,
       }]}>
-        {ContentSection}
+        <FlatList
+          data={contentList}
+          keyExtractor={(v, idx) => `content_${idx}`}
+          renderItem={({ item }) => item}
+          decelerationRate="fast"
+          pagingEnabled={true}
+          snapToAlignment="start"
+          snapToInterval={screenHeight}
+          onScroll={handleContentScroll}
+          scrollEventThrottle={16}
+        />
       </View>
       <SafeAreaView
         style={[styles.sectionContainer, {

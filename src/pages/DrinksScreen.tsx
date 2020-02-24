@@ -1,5 +1,5 @@
-import { Dimensions, FlatList, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import React, { useCallback, useMemo, useState } from 'react';
+import { Dimensions, ScrollView, Text, View } from 'react-native';
+import React, { useCallback } from 'react';
 import { MealItem } from '../components';
 // @ts-ignore
 import Meal1 from '../../assets/img/drink_1.png';
@@ -26,8 +26,9 @@ export const DrinksScreen: React.FC<Props> = ({ title }) => {
   }, []);
 
   return (
-    <SafeAreaView
+    <View
       style={{
+        paddingTop: 50,
         flex: 1,
       }}
     >
@@ -91,6 +92,6 @@ export const DrinksScreen: React.FC<Props> = ({ title }) => {
           onPress={handleMealPress}
         />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };

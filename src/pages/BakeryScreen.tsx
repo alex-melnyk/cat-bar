@@ -81,8 +81,9 @@ export const BakeryScreen: React.FC<Props> = ({ title }) => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={{
+        paddingTop: 50,
         flex: 1,
       }}
     >
@@ -161,6 +162,6 @@ export const BakeryScreen: React.FC<Props> = ({ title }) => {
           onPress={handleMealPress}
         />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   );
 };

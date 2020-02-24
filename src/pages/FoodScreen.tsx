@@ -1,4 +1,4 @@
-import { Dimensions, FlatList, SafeAreaView, ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { Dimensions, FlatList, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import React, { useCallback, useMemo, useState } from 'react';
 import { MealItem } from '../components';
 // @ts-ignore
@@ -81,8 +81,9 @@ export const FoodScreen: React.FC<Props> = ({ title }) => {
   };
 
   return (
-    <SafeAreaView
+    <View
       style={{
+        paddingTop: 50,
         flex: 1,
       }}
     >
@@ -123,47 +124,49 @@ export const FoodScreen: React.FC<Props> = ({ title }) => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-      <ScrollView
-        contentContainerStyle={{
-          flexGrow: 1,
-          paddingRight: 20,
-          marginTop: 25,
-        }}
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
-        decelerationRate="fast"
-        pagingEnabled={true}
-        snapToAlignment="start"
-        snapToInterval={DISH_ITEM_WIDTH}
-      >
-        <MealItem
-          width={DISH_ITEM_WIDTH}
-          height={DISH_ITEM_HEIGHT}
-          name="Rogue"
-          extra="with chicken"
-          image={Meal1}
-          calories={1020}
-          onPress={handleMealPress}
-        />
-        <MealItem
-          width={DISH_ITEM_WIDTH}
-          height={DISH_ITEM_HEIGHT}
-          name="Meat"
-          extra="with spinach"
-          image={Meal2}
-          calories={910}
-          onPress={handleMealPress}
-        />
-        <MealItem
-          width={DISH_ITEM_WIDTH}
-          height={DISH_ITEM_HEIGHT}
-          name="Stake"
-          extra="with broccoli"
-          image={Meal3}
-          calories={1690}
-          onPress={handleMealPress}
-        />
-      </ScrollView>
-    </SafeAreaView>
+      <View>
+        <ScrollView
+          contentContainerStyle={{
+            flexGrow: 1,
+            paddingRight: 20,
+            marginTop: 25,
+          }}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          decelerationRate="fast"
+          pagingEnabled={true}
+          snapToAlignment="start"
+          snapToInterval={DISH_ITEM_WIDTH}
+        >
+          <MealItem
+            width={DISH_ITEM_WIDTH}
+            height={DISH_ITEM_HEIGHT}
+            name="Rogue"
+            extra="with chicken"
+            image={Meal1}
+            calories={1020}
+            onPress={handleMealPress}
+          />
+          <MealItem
+            width={DISH_ITEM_WIDTH}
+            height={DISH_ITEM_HEIGHT}
+            name="Meat"
+            extra="with spinach"
+            image={Meal2}
+            calories={910}
+            onPress={handleMealPress}
+          />
+          <MealItem
+            width={DISH_ITEM_WIDTH}
+            height={DISH_ITEM_HEIGHT}
+            name="Stake"
+            extra="with broccoli"
+            image={Meal3}
+            calories={1690}
+            onPress={handleMealPress}
+          />
+        </ScrollView>
+      </View>
+    </View>
   );
 };
